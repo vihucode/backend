@@ -32,16 +32,16 @@ let persons = [
 ]
 
 
-app.get('http://localhost:3001/api/persons/info', (req, res) => {
+app.get('/info', (req, res) => {
     const now = new Date();
     res.send('<p>Phonebook has info for ' + persons.length + ' people </p> ' + now.toString())
   })
   
-app.get('http://localhost:3001/api/persons/', (req, res) => {
+app.get('/api/persons', (req, res) => {
     res.json(persons)
   })
 
-app.get('http://localhost:3001/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
     if (person) {
@@ -53,14 +53,14 @@ app.get('http://localhost:3001/api/persons/:id', (request, response) => {
     response.json(person)
   })
 
-app.delete('http://localhost:3001/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
   
     response.status(204).end()
   })
 
-app.post('http://localhost:3001/api/persons', (request, response) => {
+app.post('/api/persons', (request, response) => {
     const person = request.body
     if (persons.find(item => item.name === person.name)) {
         return response.status(400).json({ 
