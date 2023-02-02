@@ -53,7 +53,7 @@ app.get('/api/persons:id', (request, response) => {
     response.json(person)
   })
 
-app.delete('http://localhost:3001/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
   
