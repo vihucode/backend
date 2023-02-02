@@ -1,12 +1,6 @@
 const express = require('express')
 const app = express()
-
-app.use(express.json())
 const cors = require('cors')
-
-app.use(express.json())
-app.use(express.static('build'))
-app.use(cors())
 
 let persons = [
     {
@@ -31,6 +25,9 @@ let persons = [
     }
 ]
 
+app.use(express.json())
+app.use(express.static('build'))
+app.use(cors())
 
 app.get('/info', (req, res) => {
     const now = new Date();
