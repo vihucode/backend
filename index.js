@@ -63,12 +63,12 @@ app.post('/api/persons', (request, response) => {
         return response.status(400).json({ 
           error: 'name must be unique' 
           })
-    }else if (persons.find(item => item.number === person.number)){
+    }else if(persons.find(item => item.number === person.number)){
         return response.status(400).json({ 
             error: 'number must be unique' 
           })
     }else{
-        person.id = Math.floor(Math.random() * 100);
+        person.id = Math.floor(Math.random() * 10000);
         persons = persons.concat(person)
         response.json(person)
     }
