@@ -25,10 +25,14 @@ const unknownEndpoint = (request, response) => {
 
 app.use(cors())
 
-app.get('/info', (req, res) => {
-    const now = new Date();
-    res.send('<p>Phonebook has info for ' + persons.length + ' people </p> ' + now.toString())
-  })
+app.get('/info', (req, res, next) => {
+  Person.countDocuments({})
+    .then(count => {
+      const now = new Date();
+      res.send(`<p>Phonebook has info for ${count} people</p><p>${now.toString()}</p>`);
+    })
+    .catch(error => next(error));
+});
   
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
